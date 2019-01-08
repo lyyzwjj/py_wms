@@ -8,6 +8,7 @@ class BookInfo(models.Model):
     bpub_date = models.DateField
     bread = models.IntegerField(default=0)
     bcomment = models.IntegerField(default=0)
+    bprice = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     isDelete = models.BooleanField(default=False)
 
 
@@ -26,3 +27,29 @@ class Brand(models.Model):
 
     class Meta:
         db_table = "brand"
+
+
+class Employee(models.Model):
+    name = models.CharField(max_length=255, db_column='name')
+    password = models.CharField(max_length=255, db_column='password')
+    email = models.CharField(max_length=255, db_column='email')
+    age = models.IntegerField(db_column='age')
+    admin = models.BooleanField(default=False)
+    dept = models.ForeignKey('Department', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = "employee"
+
+
+class Department(models.Model):
+    name = models.CharField(max_length=255, db_column='name')
+    sn = models.CharField(max_length=255, db_column='sn')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = "department"
