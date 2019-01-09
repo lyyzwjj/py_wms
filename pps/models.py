@@ -21,6 +21,36 @@ class HeroInfo(models.Model):
     isDelete = models.BooleanField(default=False)
 
 
+class NewsType(models.Model):
+    '''新闻类型类'''
+    type_name = models.CharField(max_length=20)
+    news_info = models.ManyToManyField("NewsInfo")
+
+
+class NewsInfo(models.Model):
+    title = models.CharField(max_length=20)
+    pub_date = models.DateTimeField(auto_now_add=True)
+    content = models.TextField()
+    # news_type = models.ManyToManyField("NewsType")
+
+
+class EmployeeBasicInfo(models.Model):
+    name = models.CharField(max_length=20)
+    gender = models.BooleanField(default=False)
+    age = models.IntegerField()
+    employee_detail = models.OneToOneField('EmployeeDetailInfo', on_delete=models.CASCADE)
+
+
+class EmployeeDetailInfo(models.Model):
+    addr = models.CharField(max_length=256)
+    # employee_basic = models.OneToOneField('EmployeeBasicInfo')
+
+
+class AreaInfo(models.Model):
+    atitle = models.CharField(max_length=20)
+    aParent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
+
+
 class Brand(models.Model):
     name = models.CharField(max_length=255, db_column='name')
     sn = models.CharField(max_length=255, db_column='sn')
@@ -53,3 +83,13 @@ class Department(models.Model):
 
     class Meta:
         db_table = "department"
+
+
+class SystemMenu(models.Model):
+    name = models.CharField(max_length=255, db_column='name')
+    sn = models.CharField(max_length=255, db_column='sn')
+    url = models.CharField(max_length=255, db_column='url')
+    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = "systemmenu"

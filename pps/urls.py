@@ -6,5 +6,6 @@ urlpatterns = [
     # 通过url函数设置url路由配置项
     path('index', views.index),
     path('create', views.create),
-    path('delete/<int:did>', views.delete)
+    path('delete/<int:did>', views.delete),
+    path('menus', views.system_menu)
 ]
