@@ -1,15 +1,45 @@
 from django.db import models
 
 
+class BookInfoManager(models.Manager):
+    '''改变查询的结果集'''
+
+    def all(self):
+        books = super().all()
+        books = books.filter(isDelete=False)
+        return books
+
+    '''封装函数'''
+
+    def create_book(self, btitle, bpub_date):
+        # book = BookInfo()
+        book = self.model
+        book.btitle = btitle
+        book.bpub_date = bpub_date
+        book.save()
+        return book
+
+
+
 # Create your models here.
 class BookInfo(models.Model):
     '''图书模型类'''
     btitle = models.CharField(max_length=20)
-    bpub_date = models.DateField
+    bpub_date = models.DateField(null=True)
     bread = models.IntegerField(default=0)
     bcomment = models.IntegerField(default=0)
     bprice = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     isDelete = models.BooleanField(default=False)
+    objects = BookInfoManager()
+    '''
+    @classmethod
+    def createBook(cls, btitle, bpub_date):
+        obj = cls()
+        obj.btitle = btitle
+        obj.bpub_date = bpub_date
+        obj.save()
+        return obj
+    '''
 
 
 class HeroInfo(models.Model):
