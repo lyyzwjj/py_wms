@@ -23,8 +23,9 @@ SECRET_KEY = '+y$m)pty5!@ypds$-1s-(i560kn76y7!nc$wgq#94k22r0a5#^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pps.apps.PpsConfig',
     'app.apps.AppConfig',
+    'learn_test.apps.LearnTestConfig',
 ]
 
 MIDDLEWARE = [
