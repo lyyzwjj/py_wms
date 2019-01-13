@@ -11,6 +11,7 @@
                     url: '/learn_test/ajax_handle',
                     type: 'get',
                     dataType: 'json',
+                    async: false,  //同步ajax  默认是true 异步ajax请求
                 }).success(function (data) {
                     alert(data.res == 1)
                     $('#message').show().html('提示信息')

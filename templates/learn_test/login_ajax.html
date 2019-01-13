@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax登录页面</title>
+    <script src="/static/jquery.js"></script>
+    <script>
+        $(function () {
+            $("#btnLogin").click(function () {
+                username = $('#username').val()
+                password = $('#password').val()
+                $.ajax({
+                    url: '/learn_test/ajax_login_check',
+                    type: 'post',
+                    data: {'username': username, 'password': password},
+                    dataType: 'json',
+                    // async: false,  //同步ajax  默认是true 异步ajax请求
+                }).success(function (data) {
+                    if (data.res == 0) {
+                        $('#errmsg').show().html('用户名或密码错误')
+                    } else {
+                        location.href = '/learn_test/index'
+                    }
+                })
+            })
+        })
+    </script>
+    <style>
+        #errmsg {
+            display: none;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+<form method="post" action="/learn_test/login_check">
+    用户名:<input name="username" id="username" type="text"><br>
+    密码:<input name="password" id="password" type="password"><br>
+    <input type="button" id="btnLogin" value="登录">
+    <div id="errmsg"></div>
+</form>
+</body>
+</html>

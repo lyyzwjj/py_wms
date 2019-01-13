@@ -37,5 +37,17 @@ def ajax_test(request):
 
 
 def ajax_handle(request):
-
     return JsonResponse({"res": 1})
+
+
+def ajax_login(request):
+    return render(request, 'learn_test/login_ajax.html')
+
+
+def ajax_login_check(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    if username == 'wjj' and password == 'wzzst310':
+        return JsonResponse({"res": 1})
+    else:
+        return JsonResponse({"res": 0})

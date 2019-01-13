@@ -8,5 +8,7 @@ urlpatterns = [
     path('login', views.login),
     path('login_check', views.login_check),
     path('ajax_test', views.ajax_test),
-    path('ajax_handle', views.ajax_handle)
+    path('ajax_handle', views.ajax_handle),
+    path('ajax_login', views.ajax_login),
+    path('ajax_login_check', views.ajax_login_check)
 ]
