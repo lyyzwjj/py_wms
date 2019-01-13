@@ -10,5 +10,9 @@ urlpatterns = [
     path('ajax_test', views.ajax_test),
     path('ajax_handle', views.ajax_handle),
     path('ajax_login', views.ajax_login),
-    path('ajax_login_check', views.ajax_login_check)
+    path('ajax_login_check', views.ajax_login_check),
+    path('set_cookie', views.set_cookie),
+    path('get_cookie', views.get_cookie),
+    path('set_session', views.set_session),
+    path('get_session', views.get_session)
 ]

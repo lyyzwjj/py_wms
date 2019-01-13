@@ -1,6 +1,6 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse, request as r
+from datetime import datetime, timedelta
 
 
 # Create your views here.
@@ -11,16 +11,27 @@ def index(request):
 
 
 def login(request):
-    return render(request, 'learn_test/login.html')
+    if 'username' in request.COOKIES:
+        username = request.COOKIES['username']
+    else:
+        username = ''
+    return render(request, 'learn_test/login.html', {'username': username})
 
 
 def login_check(request):
     print(request.POST)
     username = request.POST['username']
     password = request.POST['password']
+    # remember = request.POST['remember']
+    # cookie 只能get出来 不在QueryDict里面
+    remember = request.POST.get('remember')
+    print(remember)
     print(username + ':' + password)
     if username == 'wjj' and password == 'wzzst310':
-        return redirect('/learn_test/index')
+        response = redirect('/learn_test/index')
+        if remember == 'on':
+            response.set_cookie('username', username, max_age=10 * 24 * 3600)
+        return response
     else:
         return redirect('/learn_test/login')
     return HttpResponse('OK')
@@ -51,3 +62,32 @@ def ajax_login_check(request):
         return JsonResponse({"res": 1})
     else:
         return JsonResponse({"res": 0})
+
+
+def set_cookie(request):
+    response = HttpResponse('设置cookie')
+    # response.set_cookie('num', 1)
+    # 设置两周之后过期
+    response.set_cookie('num', 1, expires=datetime.now() + timedelta(days=14))
+    # response.set_cookie('num', 1, max_age=10)# max_age 单位s
+    # response.set_cookie('num', 1, max_age=14*24*3600)# max_age 单位s
+    # response.set_cookie('num', 1)
+    return response
+
+
+def get_cookie(request):
+    num = request.COOKIES['num']
+    return HttpResponse(num)
+
+
+def set_session(request):
+    request.session['username'] = 'smart'
+    request.session['age'] = 18
+    # response.set_cookie('num', 1)
+    return HttpResponse('设置session')
+
+
+def get_session(request):
+    username = request.session['username']
+    age = request.session['age']
+    return HttpResponse(username + ":" + str(age))
