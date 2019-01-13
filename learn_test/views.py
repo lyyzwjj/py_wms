@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-from django.http import HttpResponse, request as r
+from django.http import HttpResponse, JsonResponse, request as r
 
 
 # Create your views here.
@@ -30,3 +30,12 @@ def learn():
     q = r.QueryDict("a=18&a='66'&b='4'")
     print(q['a'])
     print(q.get('b'))
+
+
+def ajax_test(request):
+    return render(request, 'learn_test/ajax_test.html')
+
+
+def ajax_handle(request):
+
+    return JsonResponse({"res": 1})
