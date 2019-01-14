@@ -3,13 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>部门信息</title>
+    <style>
+        .red {
+            background-color: red;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+
+        .green {
+            background-color: green;
+        }
+    </style>
 </head>
 <body>
 <a href="/create">新增</a>
-{% for d in departments %}
-    <li>
-        {{ d.name }}--<a href="/delete/{{ d.id }}">删除</a>
-    </li>
-{% endfor %}
+<ul>
+    {% for d in departments %}
+        {% if d.id <= 2 %}
+            <li class="red">
+                {{ forloop.counter }}--{{ d.name }}--<a href="/delete/{{ d.id }}">删除</a>
+            </li>
+        {% elif d.id <= 5 %}
+            <li class="yellow">
+                {{ forloop.counter }}--{{ d.name }}--<a href="/delete/{{ d.id }}">删除</a>
+            </li>
+        {% else %}
+            <li class="green">
+                {{ forloop.counter }}--{{ d.name }}--<a href="/delete/{{ d.id }}">删除</a>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
 </body>
 </html>

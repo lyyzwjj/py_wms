@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from pps.models import Department, SystemMenu
+from pps.models import Department, SystemMenu, NewsInfo
 from django.http import HttpResponse, HttpResponseRedirect
 
 
@@ -7,6 +7,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 def index(request):
     departments = Department.objects.all()
     return render(request, 'pps/index.html', {'departments': departments})
+
+
+def filter(request):
+    news = NewsInfo.objects.all()
+    return render(request, 'pps/filter.html', {'news': news})
 
 
 def create(request):
