@@ -84,6 +84,8 @@ def set_session(request):
     request.session['username'] = 'smart'
     request.session['age'] = 18
     # response.set_cookie('num', 1)
+    # del request.session['age']删除session
+    # request.session.set_expiry(1 * 24 * 3600) 设置过期时间
     return HttpResponse('设置session')
 
 
@@ -91,3 +93,13 @@ def get_session(request):
     username = request.session['username']
     age = request.session['age']
     return HttpResponse(username + ":" + str(age))
+
+
+def clear_session(request):
+    request.session.clear()
+    return HttpResponse('清除成功')
+
+
+def flush_session(request):
+    request.session.flush()
+    return HttpResponse('删除成功')
