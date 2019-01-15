@@ -10,5 +10,9 @@ urlpatterns = [
     path('delete/<int:did>', views.delete),
     path('menus', views.system_menu),
     path('temp_inherit', views.temp_inherit),
-    path('temp_escape', views.temp_escape)
+    path('temp_escape', views.temp_escape),
+    path('change_pwd', views.change_pwd),
+    path('change_pwd_action', views.change_pwd_action),
+    path('login', views.login),
+    path('login_check', views.login_check)
 ]
