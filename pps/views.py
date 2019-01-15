@@ -36,3 +36,11 @@ def system_menu(request):
     menu_parent = menu.parent
     menu_children = menu.systemmenu_set.all()
     return render(request, 'pps/menus.html', {'menu': menu, 'parent': menu_parent, 'children': menu_children})
+
+
+def temp_inherit(request):
+    return render(request, 'pps/child.html')
+
+
+def temp_escape(request):
+    return render(request, 'pps/html_escape.html', {'content': '<h1>hello</h1>'})
