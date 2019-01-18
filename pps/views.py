@@ -49,8 +49,8 @@ def temp_escape(request):
 
 
 def login(request):
-    if request.session.has_key('islogin'):
-        return redirect('pps/change_pwd')
+    if request.session.get('islogin'):
+        return redirect('/pps/change_pwd')
     else:
         if 'username' in request.COOKIES:
             username = request.COOKIES['username']
@@ -64,6 +64,10 @@ def login_check(request):
     username = request.POST['username']
     password = request.POST['password']
     # remember = request.POST['remember']
+    vcode = request.POST.get('vcode')
+    verifycode = request.session.get('verifycode')
+    if vcode != verifycode:
+        return redirect('/pps/login')
     # cookie 只能get出来 不在QueryDict里面
     remember = request.POST.get('remember')
     print(remember)
@@ -130,7 +134,8 @@ def verify_code(request):
     for i in range(0, 4):
         rand_str += str1[random.randrange(0, len(str1))]
     # 构造字体对象，ubuntu的字体路径为“/usr/share/fonts/truetype/freefont”
-    font = ImageFont.truetype('Arial.ttf', 23)
+    # mac font = ImageFont.truetype('Arial.ttf', 23)
+    font = ImageFont.truetype('FreeMono.ttf', 23)
     # 构造字体颜色
     fontcolor = (255, random.randrange(0, 255), random.randrange(0, 255))
     # 绘制4个字
@@ -149,9 +154,14 @@ def verify_code(request):
     buf = cStringIO.StringIO()
     """
     # 内存文件操作-->此方法为python3的
-    import io
-    buf = io.BytesIO()
+    # import io
+    # buf = io.BytesIO()
+    buf = BytesIO()
     # 将图片保存在内存中，文件类型为png
     im.save(buf, 'png')
     # 将内存中的图片数据返回给客户端，MIME类型为图片png
     return HttpResponse(buf.getvalue(), 'image/png')
+
+
+def reverse_index(request):
+    return render(request, 'pps/reverse_index.html')

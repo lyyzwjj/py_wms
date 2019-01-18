@@ -103,3 +103,5 @@ def clear_session(request):
 def flush_session(request):
     request.session.flush()
     return HttpResponse('删除成功')
+
+
