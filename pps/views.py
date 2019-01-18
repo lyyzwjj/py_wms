@@ -165,3 +165,22 @@ def verify_code(request):
 
 def reverse_index(request):
     return render(request, 'pps/reverse_index.html')
+
+
+def show_args(request, a, b):
+    return HttpResponse(str(a) + ':' + str(b))
+
+
+def show_kwargs(request, c, d):
+    return HttpResponse(str(c) + ':' + str(d))
+
+
+from django.urls import reverse
+
+
+def test_redirect(request):
+    # url = reverse('pps:index')
+    # url = reverse('pps:show_args', args=(1, 2))
+    # url = reverse('pps:show_args', args={'a': 3, 'b': 4}) 这样写不行
+    url = reverse('pps:show_kwargs', kwargs={'c': 3, 'd': 4})
+    return redirect(url)

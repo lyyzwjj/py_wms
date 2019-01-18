@@ -9,10 +9,11 @@
             $("#btnLogin").click(function () {
                 username = $('#username').val()
                 password = $('#password').val()
+                csrfmiddlewaretoken = $(':input[name=csrfmiddlewaretoken]').val()
                 $.ajax({
                     url: '/learn_test/ajax_login_check',
                     type: 'post',
-                    data: {'username': username, 'password': password},
+                    data: {'username': username, 'password': password, 'csrfmiddlewaretoken': csrfmiddlewaretoken},
                     dataType: 'json',
                     // async: false,  //同步ajax  默认是true 异步ajax请求
                 }).success(function (data) {
@@ -35,6 +36,7 @@
 
 <body>
 <form method="post" action="/learn_test/login_check">
+    {% csrf_token %}
     用户名:<input name="username" id="username" type="text"><br>
     密码:<input name="password" id="password" type="password"><br>
     <input type="button" id="btnLogin" value="登录">

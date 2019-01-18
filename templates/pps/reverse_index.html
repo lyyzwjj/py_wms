@@ -7,6 +7,14 @@
 <body>
 <a href="/pps/index">首页</a>
 url反向解析生成index连接:<br>
-<a href="{% url 'pps:index' %}">首页-1</a>
+<a href="{% url 'pps:index' %}">首页-1</a><br>
+/pps/show_args/1/2:<br>
+<a href="/pps/show_args/1/2">show_args/1/2</a><br>
+<a href={% url 'pps:show_args' 5 888 %}>动态show_args/1/2</a><br>
+<a href={% url 'pps:show_args' b=5 a=888 %}>动态show_args/1/2</a><br>
+/pps/show_kwargs/3/4:<br>
+<a href="/pps/show_kwargs/3/4">show_kwargs/3/4</a><br>
+<a href={% url 'pps:show_kwargs' d=666 c=3 %}>动态show_args/3/4</a><br>
+
 </body>
 </html>
