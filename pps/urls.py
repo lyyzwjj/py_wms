@@ -19,6 +19,7 @@ urlpatterns = [
     path('login_check', views.login_check),
     path('verify_code', views.verify_code),
     path('reverse_index', views.reverse_index),
+    path('static_test', views.static_test),
     path('test_redirect', views.test_redirect),
     path('show_args/<int:a>/<int:b>', views.show_args, name='show_args'),
     re_path('show_kwargs/(?P<c>\d+)/(?P<d>\d+)', views.show_kwargs, name='show_kwargs'),

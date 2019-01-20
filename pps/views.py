@@ -3,6 +3,7 @@ from pps.models import Department, SystemMenu, NewsInfo
 from django.http import HttpResponse, HttpResponseRedirect
 from PIL import Image, ImageDraw, ImageFont
 from django.utils.six import BytesIO
+from django.conf import settings
 
 
 # Create your views here.
@@ -184,3 +185,9 @@ def test_redirect(request):
     # url = reverse('pps:show_args', args={'a': 3, 'b': 4}) 这样写不行
     url = reverse('pps:show_kwargs', kwargs={'c': 3, 'd': 4})
     return redirect(url)
+
+
+def static_test(request):
+    # ['/Users/wjj/PycharmProjects/wms/static']
+    print(settings.STATICFILES_DIRS)
+    return render(request, 'pps/static_test.html')
