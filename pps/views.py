@@ -189,6 +189,9 @@ def test_redirect(request):
 def static_test(request):
     # ['/Users/wjj/PycharmProjects/wms/static']
     # ['/home/wjj/PycharmProjects/wms/static']
+    print(request.META)
+    user_ip = request.META['REMOTE_ADDR']
+    print(user_ip)
     print(settings.STATICFILES_DIRS)
     print(settings.STATICFILES_FINDERS)
     # ['django.contrib.staticfiles.finders.FileSystemFinder', 'django.contrib.staticfiles.finders.AppDirectoriesFinder']
