@@ -16,7 +16,6 @@ def filter(request):
     news = NewsInfo.objects.all()
     return render(request, 'pps/filter.html', {'news': news})
 
-
 def create(request):
     d = Department()
     d.name = '综管部'
@@ -189,5 +188,10 @@ def test_redirect(request):
 
 def static_test(request):
     # ['/Users/wjj/PycharmProjects/wms/static']
+    # ['/home/wjj/PycharmProjects/wms/static']
+    settings
+    print(type(settings))
     print(settings.STATICFILES_DIRS)
+    print(settings.STATICFILES_FINDERS)
+    # ['django.contrib.staticfiles.finders.FileSystemFinder', 'django.contrib.staticfiles.finders.AppDirectoriesFinder']
     return render(request, 'pps/static_test.html')
