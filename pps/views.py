@@ -189,8 +189,6 @@ def test_redirect(request):
 def static_test(request):
     # ['/Users/wjj/PycharmProjects/wms/static']
     # ['/home/wjj/PycharmProjects/wms/static']
-    settings
-    print(type(settings))
     print(settings.STATICFILES_DIRS)
     print(settings.STATICFILES_FINDERS)
     # ['django.contrib.staticfiles.finders.FileSystemFinder', 'django.contrib.staticfiles.finders.AppDirectoriesFinder']
