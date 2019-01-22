@@ -20,7 +20,6 @@ class BookInfoManager(models.Manager):
         return book
 
 
-
 # Create your models here.
 class BookInfo(models.Model):
     '''图书模型类'''
@@ -123,3 +122,8 @@ class SystemMenu(models.Model):
 
     class Meta:
         db_table = "systemmenu"
+
+
+class PicTest(models.Model):
+    '''上传图片'''
+    gpic = models.ImageField(upload_to='pps')

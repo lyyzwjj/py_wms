@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from pps.models import Department, SystemMenu, NewsInfo
+from pps.models import Department, SystemMenu, NewsInfo, PicTest
 from django.http import HttpResponse, HttpResponseRedirect
 from PIL import Image, ImageDraw, ImageFont
 from django.utils.six import BytesIO
@@ -191,3 +191,27 @@ def static_test(request):
     # ['/Users/wjj/PycharmProjects/wms/static']
     print(settings.STATICFILES_DIRS)
     return render(request, 'pps/static_test.html')
+
+
+def show_upload(request):
+    return render(request, 'pps/upload_pic.html')
+
+
+def upload_handle(request):
+    # 1.获取上传图片
+    pic = request.FILES['pic']
+    print(type(pic))
+    # print(pic.name)
+    # pic.chunks()
+    # 上传文件不大于2.5m,文件放在内存中
+    # 上传文件大于2.5m,文件写到一个临时文件中
+    # 2.创建一个文件
+    save_path = '%s/pps/%s' % (settings.MEDIA_ROOT, pic.name)
+    with open(save_path, 'wb') as f:
+        # 3.获取上传文件内容并写到创建文件内容中
+        for content in pic.chunks():
+            f.write(content)
+    # 4.在数据库中保存上传纪录
+    PicTest.objects.create(gpic='pps/%s' % pic.name)
+    # 5.返回
+    return HttpResponse('OK')
