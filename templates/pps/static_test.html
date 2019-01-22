@@ -1,11 +1,14 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>静态文件</title>
 </head>
 <body>
-<img src="/static/images/正面.jpg">
-<img src="/abc/images/背面.jpg">
+<img src="/static/images/宅男腐女的恋爱真难.jpg"><br>
+<img src="/abc/images/宅男腐女的恋爱真难.jpg"><br>
+动态获取STATIC_URL,拼接静态文件路径：<br>
+<img src="{% static 'images/宅男腐女的恋爱真难.jpg' %}">
 </body>
 </html>

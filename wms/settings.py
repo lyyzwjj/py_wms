@@ -49,6 +49,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'pps.middleware.BlockedIpsMiddleware',
+    # 'pps.middleware.TestMiddleware',
+    # 异常中间调用顺序与注册顺序相反
+    'pps.middleware.ExceptionTest1Middleware',
+    'pps.middleware.ExceptionTest2Middleware',
 ]
 
 ROOT_URLCONF = 'wms.urls'
