@@ -205,6 +205,7 @@ def show_upload(request):
 
 
 def upload_handle(request):
+    print(settings.FILE_UPLOAD_HANDLES)
     # 1.获取上传图片
     pic = request.FILES['pic']
     print(type(pic))
