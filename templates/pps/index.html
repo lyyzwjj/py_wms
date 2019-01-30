@@ -20,7 +20,8 @@
 <body>
 <a href="/create">新增</a>
 <ul>
-    {% for d in departments %}
+    {# {% for d in page.object_list %} #}
+    {% for d in page %}
         {% if d.id <= 2 %}
             <li class="red">
                 {{ forloop.counter }}--{{ d.name }}--<a href="/delete/{{ d.id }}">删除</a>
@@ -36,5 +37,19 @@
         {% endif %}
     {% endfor %}
 </ul>
+<br>
+{% if page.has_previous %}
+    <a href='/pps/index/{{ page.previous_page_number }}'>&lt;上一页</a>
+{% endif %}
+{% for pindex in page.paginator.page_range %}
+    {% if pindex == page.number %}
+        {{ pindex }}
+    {% else %}
+        <a href='/pps/index/{{ pindex }}'>{{ pindex }}</a>
+    {% endif %}
+{% endfor %}
+{% if page.has_next %}
+    <a href='/pps/index/{{ page.next_page_number }}'>&gt;下一页</a>
+{% endif %}
 </body>
 </html>

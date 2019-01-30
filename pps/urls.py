@@ -6,7 +6,7 @@ app_name = 'pps'
 urlpatterns = [
     # 通过url函数设置url路由配置项
     # path('index', views.index),
-    path('index3', views.index, name='index'),
+    path('index/<int:pindex>', views.index, name='index'),
     path('filter', views.filter),
     path('create', views.create),
     path('delete/<int:did>', views.delete),

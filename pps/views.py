@@ -4,12 +4,23 @@ from django.http import HttpResponse, HttpResponseRedirect
 from PIL import Image, ImageDraw, ImageFont
 from django.utils.six import BytesIO
 from django.conf import settings
+from django.core.paginator import Paginator
 
 
 # Create your views here.
-def index(request):
+def index(request, pindex):
     departments = Department.objects.all()
-    return render(request, 'pps/index.html', {'departments': departments})
+    # 分页
+    paginator = Paginator(departments, 3)
+    print(paginator.num_pages)
+    print(paginator.page_range)
+    # 默认取第一页内容
+    if pindex == '':
+        pindex = 1
+    page = paginator.page(int(pindex))
+    print(page.number)
+    # departments = page.object_list
+    return render(request, 'pps/index.html', {'departments': departments, 'page': page})
 
 
 def filter(request):
@@ -35,6 +46,8 @@ def delete(request, did):
 
 
 def system_menu(request):
+    menu = SystemMenu.objects.filter(parent__isnull=True)
+    print(menu)
     menu = SystemMenu.objects.get(name='角色管理')
     menu_parent = menu.parent
     menu_children = menu.systemmenu_set.all()
@@ -205,7 +218,7 @@ def show_upload(request):
 
 
 def upload_handle(request):
-    print(settings.FILE_UPLOAD_HANDLES)
+    print(settings.FILE_UPLOAD_HANDLERS)
     # 1.获取上传图片
     pic = request.FILES['pic']
     print(type(pic))
